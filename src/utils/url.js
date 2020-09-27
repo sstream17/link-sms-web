@@ -44,11 +44,11 @@ export default class Url {
     }
 
     static getBaseUrl () {
-        return "api.messenger.klinkerapps.com/";
+        return "192.168.0.182:45455/";
     }
 
     static getApiVersion () {
-        return "api/v1/";
+        return "api/";
     }
 
     static getAccountParam () {
@@ -57,7 +57,7 @@ export default class Url {
 
     static getAccountPayload () {
         return {
-            account_id: store.state.account_id
+            accountId: store.state.account_id
         };
     }
 

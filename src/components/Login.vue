@@ -93,11 +93,11 @@ export default {
             this.error = false;
 
             // Create hash
-            let derived_key = sjcl.misc.pbkdf2(this.password, data.salt2, 10000, 256, hmacSHA1);
+            let derived_key = sjcl.misc.pbkdf2(this.password, data.salt2, 12000, 256, hmacSHA1);
             let base64_hash = sjcl.codec.base64.fromBits(derived_key);
 
             // Save data
-            this.$store.commit('account_id', data.account_id);
+            this.$store.commit('account_id', data.accountId);
             this.$store.commit('hash', base64_hash);
             this.$store.commit('salt', data.salt1);
 

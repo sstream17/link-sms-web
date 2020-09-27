@@ -12,7 +12,7 @@ export default class Util {
      * @param raw rgba value
      * @return RGBA string
      */
-    static expandColor (num) {
+    static expandColor(num) {
         num >>>= 0;
 
         let b = num & 0xFF,
@@ -22,7 +22,7 @@ export default class Util {
         return "rgba(" + [r, g, b, a].join(",") + ")";
     }
 
-    static entityEncode (string) {
+    static entityEncode(string) {
         while (string.indexOf("<") !== -1) {
             string = string.replace("<", "&lt;");
         }
@@ -36,9 +36,9 @@ export default class Util {
         return string;
     }
 
-    static generateSnippet (object) {
+    static generateSnippet(object) {
 
-        if(typeof object.snippet != "undefined")
+        if (typeof object.snippet != "undefined")
             return object.snippet;
 
         let snippet = object.snippet || object.dataNoEmoji || object.data;
@@ -54,7 +54,7 @@ export default class Util {
         return snippet;
     }
 
-    static generateContact (id, name, phone_number, mute, private_notifications, color, accent, ligher, darker) {
+    static generateContact(id, name, phone_number, mute, private_notifications, color, accent, ligher, darker) {
         return {
             id: id,
             name: name,
@@ -88,7 +88,7 @@ export default class Util {
         *
         * @param speed - default to zero (no animation)
         */
-    static scrollToBottom(speed=0) {
+    static scrollToBottom(speed = 0) {
 
         if (Util.isScrolledToBottom()) // Ignore if at bottom
             return false;
@@ -102,8 +102,8 @@ export default class Util {
         jump(bottom, {
             duration: speed,
             easing: (t, b, c, d) => { // easeInOutCubic - @jaxgeller
-                if ((t/=d/2) < 1) return c/2*t*t*t + b;
-                return c/2*((t-=2)*t*t + 2) + b;
+                if ((t /= d / 2) < 1) return c / 2 * t * t * t + b;
+                return c / 2 * ((t -= 2) * t * t + 2) + b;
             }
         });
     }
@@ -131,7 +131,7 @@ export default class Util {
     static snackbar(message) {
         let data = {};
 
-        if(typeof message == "string")
+        if (typeof message == "string")
             data = { message: message };
         else
             data = message;
@@ -181,7 +181,7 @@ export default class Util {
         }, 1250);
     }
 
-    static addEventListeners(events, listener, object=window) {
+    static addEventListeners(events, listener, object = window) {
         return events.map(
             (i) => {
                 object.addEventListener(i, listener);
@@ -203,7 +203,7 @@ export default class Util {
      * Requests Notification Permissions
      * Handles check and error cases
      */
-    static requestNotifications () {
+    static requestNotifications() {
 
         // Determine if notification request is necessary
         if (!store.state.notifications || !Notifications.needsPermission()) {
@@ -214,7 +214,7 @@ export default class Util {
         Notifications.requestPermission().then(() => {
             // Noop
         }).catch(() => {
-            const settingsRedirect = () => router.push('settings').catch(() => {});
+            const settingsRedirect = () => router.push('settings').catch(() => { });
 
             // If denied, set setting to false and alert
             store.commit('notifications', false);
@@ -228,12 +228,17 @@ export default class Util {
         // Handle redirect to settings page
     }
 
-    static firebaseConfig () {
+    static firebaseConfig() {
         const config = {
-            apiKey: "AIzaSyB0pMWyfvde4mbKO20t23EEGECEb5itD7I",
-            authDomain: "messenger-42616.firebaseapp.com",
-            databaseURL: "https://messenger-42616.firebaseio.com",
-            storageBucket: "messenger-42616.appspot.com",
+            apiKey: "AIzaSyCmkXrvty2k65A92-YZlHOhWWOBwJBz-vw",
+            authDomain: "link-sms-d14e5.firebaseapp.com",
+            databaseURL: "https://link-sms-d14e5.firebaseio.com",
+            projectId: "link-sms-d14e5",
+            storageBucket: "link-sms-d14e5.appspot.com",
+            messagingSenderId: "465136281991",
+            appId: "1:465136281991:web:07aba92a0c00e466a18b22",
+            measurementId: "G-MK9WEQRSVV"
+
         };
 
         firebase.initializeApp(config);
@@ -246,10 +251,10 @@ export default class Util {
         colorString = colorString.replace("rgb(", "").replace(")", "");
 
         // Get actual colors in sRGB
-        const  colorArray = colorString.split(",");
-        const  red = this.getSRGB(colorArray[0]);
-        const  green = this.getSRGB(colorArray[1]);
-        const  blue = this.getSRGB(colorArray[2]);
+        const colorArray = colorString.split(",");
+        const red = this.getSRGB(colorArray[0]);
+        const green = this.getSRGB(colorArray[1]);
+        const blue = this.getSRGB(colorArray[2]);
 
         // Compute the relative luminance of the background color
         // https://www.w3.org/TR/WCAG20/#relativeluminancedef
@@ -271,7 +276,7 @@ export default class Util {
     }
 }
 
-Array.prototype.extend = function(array){
+Array.prototype.extend = function (array) {
     this.push.apply(this, array);
 };
 
@@ -279,7 +284,7 @@ Array.prototype.extend = function(array){
 * Contains element
 * @param element value
 */
-Array.prototype.contains = function(element) {
+Array.prototype.contains = function (element) {
     return this.indexOf(element) > -1 ? true : false;
 };
 
@@ -288,7 +293,7 @@ Array.prototype.contains = function(element) {
 * @param key
 * @param element value
 */
-Array.prototype.containsObjKey = function(key, element) {
+Array.prototype.containsObjKey = function (key, element) {
 
     for (let i = 0; i < this.length; i++)
         if (this[i][key] === element)
